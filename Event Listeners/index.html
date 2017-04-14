@@ -39,7 +39,30 @@
 
 <button></button>
 <script>
+  const divs = document.querySelectorAll('div');
+  const button = document.querySelector('button');
+  
+  function logText(e) {
+    e.stopPropagation();
+    console.log(this.classList.value);
+  }
 
+  divs.forEach(div => 
+    
+    div.addEventListener('click', logText, {
+      capture: false,
+      once: false
+    }) //the once property causes the eventlistener to be unbound after being triggered
+  )
+
+  button.addEventListener('click', ()=> {
+    console.log('click!!')
+  }, {
+    once: true
+  })
+  //event bubbling: browser figures out what you clicked on and then trigger clicks up every parent element
+  //above the clicked element. If you're listening for clicks on multiple nested elements, there is a ripple effect
+  //capture goes from top-down, and then bubbles-up during which time it starts triggering the event
 </script>
 </body>
 </html>
