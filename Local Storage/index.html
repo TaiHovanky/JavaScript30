@@ -59,6 +59,17 @@
   
   addItems.addEventListener('submit', addItem);
 
+  function toggleDone(e) {
+    if(!e.target.matches('input')) return;
+    const el = e.target;
+    const index = el.dataset.index;
+    items[index].done = !items[index].done;
+    localStorage.setItem('items', JSON.stringify(items));
+    populateList(items, itemsList);
+  } //event delegation: looking for something on the page at the time of listener being added
+  //when children elements get clicked (existing or future), parents tell children elements what to do
+  //event delegation: listen for event on parent and w/in the function, define what needs to be done
+  itemsList.addEventListener('click', toggleDone);
   populateList(items, itemsList);
 </script>
 
