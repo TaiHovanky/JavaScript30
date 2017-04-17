@@ -13,6 +13,9 @@
     </div>
   </div>
 
+  <button id="btn-0">Button 1!</button>
+  <button id="btn-1">Button 2!</button>
+  <button id="btn-2">Button 3!</button>
 <style>
   html {
     box-sizing: border-box;
@@ -60,6 +63,17 @@
   }, {
     once: true
   })
+
+  var prizes = ['A Unicorn!', 'A Hug!', 'Fresh Laundry!'];
+    for (var btnNum = 0; btnNum < prizes.length; btnNum++) {
+        // for each of our buttons, when the user clicks it...
+        document.getElementById('btn-' + btnNum).onclick = function(frozenBtnNum){
+            return function() {
+                // tell her what she's won!
+                alert(prizes[frozenBtnNum]);
+            };
+        }(btnNum); // LOOK! We're passing btnNum to our anonymous function here!
+    }
   //event bubbling: browser figures out what you clicked on and then trigger clicks up every parent element
   //above the clicked element. If you're listening for clicks on multiple nested elements, there is a ripple effect
   //capture goes from top-down, and then bubbles-up during which time it starts triggering the event

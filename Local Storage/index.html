@@ -69,8 +69,46 @@
   } //event delegation: looking for something on the page at the time of listener being added
   //when children elements get clicked (existing or future), parents tell children elements what to do
   //event delegation: listen for event on parent and w/in the function, define what needs to be done
+
+  function hover(e) {
+    if(e.target.matches('input')) {
+      let elem = e.target;
+      console.log('hiiiii')
+      alert('you hovered over me');
+    }
+  }
+
   itemsList.addEventListener('click', toggleDone);
+  itemsList.addEventListener('click', hover);
   populateList(items, itemsList);
+
+  const arr = [0, 1, 3, 4,5];
+for (var i = 0; i < arr.length; i++) {
+  // pass in the variable i so that each function 
+  // has access to the correct index
+  setTimeout(function(i_local) {
+    return function() {
+      console.log('The index of this number is: ' + i_local);
+    }
+  }(i), 3000);
+}
+
+function debounce(fn, delay) {
+  let timer = null;
+  return function () {
+    let context = this;
+    let args = arguments;
+    timer = setTimeout(function(){
+      fn.apply(context, args)
+    }, delay);
+  }
+}
+
+function coords(e) {
+  console.log('e coords', e.offsetX, e.offsetY);
+}
+
+document.addEventListener('mousemove', debounce(coords, 1000));
 </script>
 
 
